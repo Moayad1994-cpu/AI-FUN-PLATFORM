@@ -1,0 +1,115 @@
+:root {
+            --background-light: linear-gradient(135deg, #491b2e, #ec63b5);
+            --background-dark: linear-gradient(135deg, #1f1c2c, #928dab);
+            --text-light: #fff;
+            --text-dark: #ffffff;
+            --primary-color: #4CAF50;
+            --secondary-color: #d06d12;
+            --accent-color: #3082ae8a;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: var(--background-light);
+            color: var(--text-light);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background: var(--background-dark);
+            color: var(--text-dark);
+        }
+
+        header, footer {
+            background-color: var(--accent-color);
+            color: #c3bdbd;
+            text-align: center;
+            padding: 1em 0;
+            position: relative;
+            border-radius: 0 0 25% 25%;
+        }
+
+        #theme-toggle {
+            position: absolute;
+            right: 1em;
+            top: 1em;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        #theme-toggle:hover {
+            transform: rotate(20deg);
+        }
+
+        main {
+            flex: 1;
+            padding: 2em;
+            text-align: center;
+            position: relative;
+        }
+
+        main::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #thought-display, #trivia-display {
+            margin-top: 20px;
+            font-size: 1.2em;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #trivia-options {
+            margin-top: 10px;
+        }
+
+        #trivia-options button {
+            margin: 5px;
+            background-color: var(--accent-color);
+        }
+
+        #trivia-options button:hover {
+            background-color: var(--primary-color);
+        }

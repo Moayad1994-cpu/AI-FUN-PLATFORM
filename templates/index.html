@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moayad Dughmosh AI Fun Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --background-light: linear-gradient(135deg, #491b2e, #ec63b5);
+            --background-dark: linear-gradient(135deg, #1f1c2c, #928dab);
+            --text-light: #fff;
+            --text-dark: #ffffff;
+            --primary-color: #4CAF50;
+            --secondary-color: #d06d12;
+            --accent-color: #1c4f6a8a;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: var(--background-light);
+            color: var(--text-light);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background: var(--background-dark);
+            color: var(--text-dark);
+        }
+
+        header, footer {
+            background-color: var(--accent-color);
+            color: #c3bdbd;
+            text-align: center;
+            padding: 1em 0;
+            position: relative;
+            border-radius: 0 0 25% 25%;
+        }
+
+        #theme-toggle {
+            position: absolute;
+            right: 1em;
+            top: 1em;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        #theme-toggle:hover {
+            transform: rotate(20deg);
+        }
+
+        main {
+            flex: 1;
+            padding: 2em;
+            text-align: center;
+            position: relative;
+        }
+
+        main::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #thought-display, #trivia-display {
+            margin-top: 20px;
+            font-size: 1.2em;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #trivia-options {
+            margin-top: 10px;
+        }
+
+        #trivia-options button {
+            margin: 5px;
+            background-color: var(--accent-color);
+        }
+
+        #trivia-options button:hover {
+            background-color: var(--primary-color);
+        }
+        /* Ensure the body and html take full height */
+ body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container to position the loader */
+.loader-container {
+  position: absolute;
+  left: -10%;
+  bottom: 80px; /* Adjust this value to move it up from the footer */
+  transform: translateX(-10%); /* Centers it horizontally */
+  z-index: 10; /* Ensures it stays above other content if needed */
+}
+
+/* Original loader styles */
+.loader {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 25px 25px 75px rgba(0,0,0,0.55);
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.loader::before {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  background: transparent;
+  border: 1px dashed #444;
+  border-radius: 50%;
+  box-shadow: inset -5px -5px 25px rgba(0,0,0,0.25),
+              inset 5px 5px 35px rgba(0,0,0,0.25);
+}
+
+.loader::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px dashed #444;
+  box-shadow: inset -5px -5px 25px rgba(0,0,0,0.25),
+              inset 5px 5px 35px rgba(0,0,0,0.25);
+}
+
+.loader span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  background: transparent;
+  transform-origin: top left;
+  animation: radar81 2s linear infinite;
+  border-top: 1px dashed #fff;
+}
+
+.loader span::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: seagreen;
+  transform-origin: top left;
+  transform: rotate(-55deg);
+  filter: blur(30px) drop-shadow(20px 20px 20px seagreen);
+}
+
+@keyframes radar81 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Optional footer styling */
+footer {
+  position: relative;
+  width: 100%;
+  height: 60px; /* Adjust based on your footer height */
+  background: #1c4f6a8a; /* Example footer background */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Moayad Dughmosh AI Fun Platform</h1>
+            <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+    </header>
+    <main>
+        <section id="thought-section">
+            <h2>Get a Thought</h2>
+            <button onclick="getThought('en')">English Thought</button>
+            <button onclick="getThought('ar')">حكم عربية</button>
+            <p id="thought-display"></p>
+        </section>
+        <section id="trivia-section">
+            <h2>Moayad World Question</h2>
+            <button onclick="getTriviaQuestion('en')">English Question</button>
+            <button onclick="getTriviaQuestion('ar')">اسئلة عربية</button>
+            <div id="trivia-display">
+                <p id="trivia-question"></p>
+                <div id="trivia-options"></div>
+                <p id="trivia-result"></p>
+            </div>
+        </section>
+        <div class="loader">
+    <span>مؤيد دغمش</span>
+</div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <p>Developed by Moayad Dughmosh 2025</p>
+            <h3>صفحة ويب متخصصة للترفيه والثقافة </h3>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const icon = themeToggle.querySelector('i');
+                icon.classList.toggle('fa-moon');
+                icon.classList.toggle('fa-sun');
+            });
+        });
+
+        async function getThought(lang) {
+            try {
+                const response = await fetch(`/thought/${lang}`);
+                const data = await response.json();
+                document.getElementById('thought-display').innerText = data.thought;
+            } catch (error) {
+                console.error('Error fetching thought:', error);
+                document.getElementById('thought-display').innerText = 'Error fetching thought.';
+            }
+        }
+
+        async function getTriviaQuestion(lang) {
+            try {
+                const response = await fetch(`/trivia_question/${lang}`);
+                const data = await response.json();
+                if (data.error) {
+                    document.getElementById('trivia-result').innerText = data.error;
+                    return;
+                }
+                document.getElementById('trivia-question').innerText = data.question;
+                const optionsContainer = document.getElementById('trivia-options');
+                optionsContainer.innerHTML = '';
+                data.options.forEach((option) => {
+                    const button = document.createElement('button');
+                    button.innerText = option;
+                    button.onclick = () => checkAnswer(data.question_id, option);
+                    optionsContainer.appendChild(button);
+                });
+                document.getElementById('trivia-result').innerText = '';
+            } catch (error) {
+                console.error('Error fetching trivia question:', error);
+                document.getElementById('trivia-result').innerText = 'Error fetching question.';
+            }
+        }
+
+        async function checkAnswer(questionId, selectedOption) {
+            try {
+                const response = await fetch('/trivia', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question_id: questionId, selected_option: selectedOption })
+                });
+                const data = await response.json();
+                const resultText = data.is_correct ? 'Correct!' : `Wrong! The correct answer is: ${data.correct_answer}`;
+                document.getElementById('trivia-result').innerText = resultText;
+            } catch (error) {
+                console.error('Error checking answer:', error);
+                document.getElementById('trivia-result').innerText = 'Error checking answer.';
+            }
+        }
+    </script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
