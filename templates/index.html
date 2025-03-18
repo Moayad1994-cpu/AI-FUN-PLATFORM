@@ -208,6 +208,63 @@
     transform: rotate(360deg);
   }
 }
+/* From Uiverse.io by G4b413l */
+.ball {
+  position: absolute;
+  top: 70%;           /* Moved down from 50% to 70% */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 50%;
+  animation: ball-move8234 3s ease-in-out 1s infinite alternate;
+}
+
+.ball::after {
+  position: absolute;
+  content: '';
+  top: 25px;
+  right: 5px;
+  width: 5px;
+  height: 5px;
+  background: #000;
+  border-radius: 50%;
+}
+
+.bar {
+  position: absolute;
+  top: calc(70% + 50px);  /* Moved down, maintaining distance from ball */
+  left: 50%;
+  transform: translateX(-50%) rotate(-15deg);
+  width: 200px;
+  height: 12.5px;
+  background: #d3a46cbd;
+  border-radius: 30px;
+  animation: up-down6123 3s ease-in-out 1s infinite alternate;
+}
+
+@keyframes up-down6123 {
+  from {
+    transform: translateX(-50%) rotate(-15deg);
+  }
+
+  to {
+    transform: translateX(-50%) rotate(15deg);
+  }
+}
+
+@keyframes ball-move8234 {
+  from {
+    left: calc(50% + 100px);
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+
+  to {
+    left: calc(50% - 100px);
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
 
 /* Optional footer styling */
 footer {
@@ -244,6 +301,9 @@ footer {
         </section>
         <div class="loader">
     <span>مؤيد دغمش</span>
+</div>
+        <div class="bar">
+    <div class="ball"></div>
 </div>
     </main>
     <footer>
